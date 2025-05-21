@@ -1,9 +1,9 @@
 from rest_framework import viewsets, generics, permissions, status
+from .serializers import *
 from rest_framework.response import Response
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
-from .serializers import *
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):

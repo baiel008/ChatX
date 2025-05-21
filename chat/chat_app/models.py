@@ -40,7 +40,7 @@ class AnonymousChat(models.Model):
         return self.expires_at and timezone.now() > self.expires_at
 
     def __str__(self):
-        return f"AChat-{self.token}"
+        return f'{self.creator}, Created'
 
 
 class AnonymousChatParticipant(models.Model):
@@ -54,14 +54,14 @@ class AnonymousChatParticipant(models.Model):
 
 class Message(models.Model):
     chat = models.ForeignKey(AnonymousChat, on_delete=models.CASCADE, related_name='messages')
-    sender = models.ForeignKey(UserProfile, null=True, blank=True, on_delete=models.SET_NULL)
+    sender = models.ForeignKey(UserProfile, null=True, blank=True, on_delete=models.CASCADE)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     deleted = models.BooleanField(default=False)
     deleted_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return f"Msg from {self.sender} at {self.timestamp}"
+        return f"Msg from {self.sender} or {self.chat}"
 
 
 class DeletedMessageLog(models.Model):
@@ -70,7 +70,7 @@ class DeletedMessageLog(models.Model):
     deleted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Deleted by {self.deleted_by} at {self.deleted_at}"
+        return f"Deleted by {self.deleted_by} or Deleted {self.original_message}"
 
 
 class EntryLog(models.Model):
@@ -79,7 +79,7 @@ class EntryLog(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user} entered {self.chat} at {self.timestamp}"
+        return f"{self.user} entered, {self.chat}"
 
 
 class Notification(models.Model):
@@ -89,4 +89,4 @@ class Notification(models.Model):
     is_read = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Notif to {self.user}: {self.message[:30]}"
+        return f"Notif to {self.user}: {self.message} "
