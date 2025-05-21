@@ -9,7 +9,7 @@ router.register(r'participant', AnonymousChatParticipantViewSet, basename='parti
 router.register(r'message', MessageViewSet, basename='message_list')
 router.register(r'deleted', DeletedMessageLogViewSet, basename='deleted_list')
 router.register(r'entry', EntryLogViewSet, basename='entry_list')
-# router.register(r'notification', NotificationViewSet, basename='notification_list')
+router.register(r'notification', NotificationViewSet, basename='notification_list')
 
 
 urlpatterns = [
