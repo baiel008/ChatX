@@ -43,14 +43,6 @@ class AnonymousChat(models.Model):
         return f'{self.creator}, Created'
 
 
-class AnonymousChatParticipant(models.Model):
-    chat = models.ForeignKey(AnonymousChat, on_delete=models.CASCADE, related_name='participants')
-    user = models.ForeignKey(UserProfile, null=True, blank=True, on_delete=models.SET_NULL)
-    joined_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Participant {self.user} in {self.chat}"
-
 
 class Message(models.Model):
     chat = models.ForeignKey(AnonymousChat, on_delete=models.CASCADE, related_name='messages')
@@ -90,3 +82,14 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"Notif to {self.user}: {self.message} "
+
+
+class GroupChat(models.Model):
+    name = models.CharField(max_length=100)
+    admin = models.ForeignKey(UserProfile,on_delete=models.CASCADE,related_name='administered_group_chats')
+    parents = models.ManyToManyField(UserProfile,related_name='joined_group_chats' )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Group - {self.name}'
+

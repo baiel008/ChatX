@@ -6,18 +6,14 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
 
 
-class UserProfileViewSet(viewsets.ModelViewSet):
+class UserProfileListAPIView(generics.ListAPIView):
     queryset = UserProfile.objects.all()
-    serializer_class = UserProfileSerializers
+    serializer_class = UserProfileListSerializers
 
 
 class AnonymousChatViewSet(viewsets.ModelViewSet):
     queryset = AnonymousChat.objects.all()
-
-
-class AnonymousChatParticipantViewSet(viewsets.ModelViewSet):
-    queryset = AnonymousChatParticipant.objects.all()
-    serializer_class = AnonymousChatParticipantSerializers
+    serializer_class = AnonymousChatSerializers
 
 
 class MessageViewSet(viewsets.ModelViewSet):
@@ -39,3 +35,8 @@ class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializers
 
+
+
+class GroupChatViewSet(viewsets.ModelViewSet):
+    queryset = GroupChat.objects.all()
+    serializer_class = GroupChatSerializers

@@ -3,7 +3,13 @@ from .models import *
 
 
 
-class UserProfileSerializers(serializers.ModelSerializer):
+class UserProfileSimpleSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ['last_name', 'first_name']
+
+
+class UserProfileListSerializers(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = '__all__'
@@ -12,12 +18,6 @@ class UserProfileSerializers(serializers.ModelSerializer):
 class AnonymousChatSerializers(serializers.ModelSerializer):
     class Meta:
         model = AnonymousChat
-        fields = '__all__'
-
-
-class AnonymousChatParticipantSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = AnonymousChatParticipant
         fields = '__all__'
 
 
@@ -36,10 +36,16 @@ class DeletedMessageLogSerializers(serializers.ModelSerializer):
 class EntryLogSerializers(serializers.ModelSerializer):
     class Meta:
         model = EntryLog
-        field = '__all__'
+        fields = '__all__'
 
 
 class NotificationSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = '__all__'
+
+
+class GroupChatSerializers(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = '__all__'
