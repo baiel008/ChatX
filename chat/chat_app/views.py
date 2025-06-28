@@ -10,12 +10,12 @@ from .models import *
 
 class UserProfileListAPIView(generics.ListAPIView):
     queryset = UserProfile.objects.all()
-    serializer_class = UserListProfileSerializers
+    serializer_class = UserProfileListSerializers
 
 
 class UserProfileDetailAPIView(generics.RetrieveAPIView):
     queryset = UserProfile.objects.all()
-    serializer_class = UserDetailProfileSerializers
+    serializer_class = UserProfileDetailSerializers
 
 
 class AnonymousChatViewSet(viewsets.ModelViewSet):
