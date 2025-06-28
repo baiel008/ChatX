@@ -6,9 +6,16 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
 
 
+
+
 class UserProfileListAPIView(generics.ListAPIView):
     queryset = UserProfile.objects.all()
-    serializer_class = UserProfileListSerializers
+    serializer_class = UserListProfileSerializers
+
+
+class UserProfileDetailAPIView(generics.RetrieveAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserDetailProfileSerializers
 
 
 class AnonymousChatViewSet(viewsets.ModelViewSet):

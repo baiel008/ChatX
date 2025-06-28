@@ -3,10 +3,18 @@ from .models import *
 
 
 
-class UserProfileSimpleSerializers(serializers.ModelSerializer):
+class UserListProfileSerializers(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = ['last_name', 'first_name']
+        fields = ['id', 'username', 'status']
+
+
+class UserDetailProfileSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ['username', 'status', 'is_staff', 'is_active',
+                  'last_seen', 'groups']
+
 
 
 class UserProfileListSerializers(serializers.ModelSerializer):

@@ -14,4 +14,5 @@ router.register(r'group', GroupChatViewSet, basename='group_name')
 urlpatterns = [
     path('', include(router.urls)),
     path('user/', UserProfileListAPIView.as_view(), name='user_list'),
+    path('user/<int:pk>/', UserProfileDetailAPIView.as_view(), name='user_detail'),
 ]
